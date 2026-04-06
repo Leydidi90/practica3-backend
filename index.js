@@ -6,9 +6,8 @@ require("dotenv").config();
 const app = express();
 
 // --- CONFIGURACIÓN DE CORS ---
-// Esto permite que SOLO tu página de Vercel acceda a los datos
+// Permitir solicitudes CORS para desarrollo y producción
 app.use(cors());
-app.options('*', cors());
 app.use(express.json());
 
 // --- CONEXIÓN A MONGODB ---
