@@ -7,23 +7,8 @@ const app = express();
 
 // --- CONFIGURACIÓN DE CORS ---
 // Esto permite que SOLO tu página de Vercel acceda a los datos
-const allowedOrigins = [
-  'http://localhost:3000',
-  'https://cliente-proyecto3.vercel.app',
-];
-
-app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('CORS origin no permitido'));
-    }
-  },
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-}));
-
+app.use(cors());
+app.options('*', cors());
 app.use(express.json());
 
 // --- CONEXIÓN A MONGODB ---
