@@ -7,10 +7,21 @@ const app = express();
 
 // --- CONFIGURACIÓN DE CORS ---
 // Esto permite que SOLO tu página de Vercel acceda a los datos
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://cliente-proyecto3.vercel.app',
+];
+
 app.use(cors({
-  origin: "https://cliente-proyecto3.vercel.app",
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS origin no permitido'));
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+  credentials: true,
 }));
 
 app.use(express.json());
